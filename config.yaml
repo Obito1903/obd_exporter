@@ -1,0 +1,56 @@
+bt:
+  address: "C1:0B:64:26:37:2F"
+  channel: 2
+
+influx:
+  url: http://localhost:8087
+  org: obicorp
+  bucket: audi
+  token:
+
+PIDs:
+  engine_load:
+    enabled: true
+    unit: "%"
+  coolant_temp:
+    enabled: true
+    unit: "°C"
+  fuel_pressure:
+    enabled: true
+    unit: kPa
+  intake_pressure:
+    enabled: true
+    unit: kPa
+  intake_temp:
+    enabled: true
+    unit: "°C"
+  throttle_pos:
+    enabled: true
+    unit: "%"
+  run_time:
+    enabled: true
+    unit: s
+  speed:
+    enabled: true
+    unit: km/h
+  rpm:
+    enabled: true
+    unit: rpm
+  fuel_level:
+    enabled: true
+    unit: l
+  oil_temp:
+    enabled: true
+    unit: "°C"
+  fuel_rate:
+    enabled: true
+    unit: l/h
+
+# TODO: Add support for custom PIDs
+custom_pids:
+  - name: "custom_pid"
+    enabled: true
+    unit: "°C"
+    mode: 0x01
+    pid: 0x0D
+    equation: "A"
