@@ -28,9 +28,9 @@ bucket = cfg["influx"]["bucket"]
 write_api = influx.write_api()
 
 def write_to_influx(r: OBDResponse):
-    print(f"Writing to InfluxDB: {r.command.name} = {r.value} {cfg['PIDs'][r.command.name.lower()]['unit']}")
     if r.value is None:
         return
+    print(f"Writing to InfluxDB: {r.command.name} = {r.value} {cfg['PIDs'][r.command.name.lower()]['unit']}")
     point = Point(r.command.name).tag("unit", cfg["PIDs"][r.command.name.lower()]["unit"]).field("value", r.value.magnitude)
     # Log before writing to InfluxDB
     write_api.write(bucket=bucket, org="obicorp", record=point)
