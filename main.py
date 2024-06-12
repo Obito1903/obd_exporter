@@ -91,9 +91,9 @@ def ping_db() -> bool:
     response = os.system("ping -c 1 " + cfg["ping_host"])
     # and then check the response...
     if response == 0:
-        pingstatus = "Network Active"
+        pingstatus = True
     else:
-        pingstatus = "Network Error"
+        pingstatus = False
 
     return pingstatus
 
