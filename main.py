@@ -66,7 +66,7 @@ def register_trip(start: float, end: float):
     car_id = cur.fetchone()[0]
     print(car_id)
     # Insert trip
-    cur.execute(f"INSERT INTO trips (start, end, owner_id, car_id) VALUES ({start}, {end}, {owner_id}, {car_id})")
+    cur.execute(f"INSERT INTO trips (begin_timestamp, end_timestamp, owner_id, car_id) VALUES ({start}, {end}, {owner_id}, {car_id})")
     conn.commit()
 
     cur.close()
