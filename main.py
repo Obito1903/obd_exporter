@@ -119,7 +119,7 @@ def write_to_influx(r: OBDResponse):
     write_api.write(bucket=bucket, org=cfg["influx"]["org"], record=point)
 
 def enable_pids():
-    for name, pid in cfg["PIDs"].items():
+    for name, pid in cfg["profiles"][cfg["car"]["profile"]].items():
         command = OBDCommand
         if pid["enabled"]:
             if "pid" in pid.keys():
