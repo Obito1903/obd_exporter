@@ -8,49 +8,102 @@ influx:
   bucket: audi
   token:
 
-PIDs:
-  engine_load:
-    enabled: true
-    unit: "%"
-  coolant_temp:
-    enabled: true
-    unit: "°C"
-  fuel_pressure:
-    enabled: true
-    unit: kPa
-  intake_pressure:
-    enabled: true
-    unit: kPa
-  intake_temp:
-    enabled: true
-    unit: "°C"
-  throttle_pos:
-    enabled: true
-    unit: "%"
-  run_time:
-    enabled: true
-    unit: s
-  speed:
-    enabled: true
-    unit: km/h
-  rpm:
-    enabled: true
-    unit: rpm
-  fuel_level:
-    enabled: true
-    unit: l
-  oil_temp:
-    enabled: true
-    unit: "°C"
-  fuel_rate:
-    enabled: true
-    unit: l/h
+ping_host: 192.168.1.23
 
-# TODO: Add support for custom PIDs
-custom_pids:
-  - name: "custom_pid"
-    enabled: true
-    unit: "°C"
-    mode: 0x01
-    pid: 0x0D
-    equation: "A"
+pg:
+  host: 192.168.1.54
+  port: 5432
+  user: car-copilot
+  mdp: d
+  db: car-copilot
+
+owner: Samuel
+car:
+  brand: Audi
+  model: A4
+  engine: 2.0 TDI
+  year: 2009
+
+profiles:
+  default:
+    intake_temp:
+      enabled: true
+      unit: "°C"
+    engine_load:
+      enabled: true
+      unit: "%"
+    throttle_pos:
+      enabled: true
+      unit: "%"
+    speed:
+      enabled: true
+      unit: km/h
+    rpm:
+      enabled: true
+      unit: rpm
+    commanded_equiv_ratio:
+      enabled: true
+      unit: ""
+    maf:
+      enabled: true
+      unit: "g/s"
+    fuel_level:
+      enabled: true
+      unit: "L"
+    oil_temp:
+      enabled: true
+      unit: "°C"
+    fuel_rate:
+      enabled: true
+      unit: l/h
+    power:
+      enabled: true
+      description: "Power from MAF"
+      pid: "0110"
+      decoder: power_from_maf
+      size: 5
+      unit: hp
+
+  audi_a4_2.0_tdi_2009:
+    fuel_level:
+      enabled: true
+      description: "Fuel Level"
+      pid: "22100C"
+      decoder: count
+      size: 5
+      unit: "L"
+    oil_temp:
+      enabled: true
+      description: "Oil Temperature"
+      pid: "2211BE"
+      decoder: temp
+      size: 5
+      unit: "°C"
+    fuel_rate:
+      enabled: true
+      description: "Fuel Rate"
+      pid: "22111A"
+      decoder: fuel_rate
+      size: 5
+      unit: l/h
+    gear:
+      enabled: true
+      description: "Gear"
+      pid: "22100D"
+      decoder: count
+      size: 4
+      unit: ""
+    boost_pressure_actual:
+      enabled: true
+      description: "Boost Pressure Actual"
+      pid: "221057"
+      decoder: count
+      size: 5
+      unit: "hPa"
+    boost_pressure_commanded:
+      enabled: true
+      description: "Boost Pressure Commanded"
+      pid: "221149"
+      decoder: count
+      size: 5
+      unit: "hPa"

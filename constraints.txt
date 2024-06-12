@@ -5,7 +5,7 @@ charset-normalizer==3.3.2
 idna==3.6
 influxdb-client==1.40.0
 msgpack==1.0.7
-obd==0.7.2
+obd @ git+https://github.com/Obito1903/python-OBD.git@da9a4b4c436654c59316c589cde8134d963642c8
 Pint==0.20.1
 pyserial==3.5
 python-dateutil==2.8.2
@@ -16,3 +16,4 @@ requests==2.31.0
 six==1.16.0
 typing_extensions==4.9.0
 urllib3==2.2.0
+psycopg2-binary==2.9.9
