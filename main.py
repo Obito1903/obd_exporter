@@ -49,11 +49,11 @@ def register_trip(start: float, end: float):
     # Connect to postgresql
     print("Registering trip")
     conn =  psycopg2.connect(
-        host=cfg['postgres']['host'],
-        port=cfg['postgres']['port'],
-        database=cfg['postgres']['db'],
-        user=cfg['postgres']['user'],
-        password=cfg['postgres']['mdp']
+        host=cfg['pg']['host'],
+        port=cfg['pg']['port'],
+        database=cfg['pg']['db'],
+        user=cfg['pg']['user'],
+        password=cfg['pg']['mdp']
     )
     cur = conn.cursor()
 
