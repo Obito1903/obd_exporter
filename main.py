@@ -118,7 +118,7 @@ def write(r: OBDResponse):
     if local:
         name = r.command.name.lower()
 
-        if profile[r.command.name.lower()]["name"]:
+        if "name" in profile[r.command.name.lower()]:
             name = profile[r.command.name.lower()]["name"]
 
         print(f"{name} = {r.value} {profile[r.command.name.lower()]['unit']}")
@@ -131,7 +131,7 @@ def write_to_influx(r: OBDResponse):
 
     name = r.command.name.lower()
 
-    if profile[r.command.name.lower()]["name"]:
+    if "name" in profile[r.command.name.lower()]:
         name = profile[r.command.name.lower()]["name"]
 
     print(f"Writing to InfluxDB: {r.command.name} = {r.value} {profile[r.command.name.lower()]['unit']}")
