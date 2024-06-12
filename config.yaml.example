@@ -67,6 +67,7 @@ profiles:
       unit: l/h
     power:
       enabled: true
+      name: Instant engine power
       description: "Power from MAF"
       pid: "0110"
       decoder: power_from_maf
@@ -85,14 +86,14 @@ profiles:
       enabled: true
       name: "Oil temperature"
       pid: "2211BE"
-      decoder: temp
+      decoder: audi_temp
       size: 5
       unit: "°C"
     fuel_rate:
       enabled: true
       name: "Fuel rate"
       pid: "22111A"
-      decoder: fuel_rate
+      decoder: audi_fuel_rate
       size: 5
       unit: l/h
     gear:
