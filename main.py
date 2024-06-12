@@ -106,14 +106,14 @@ def write(r: OBDResponse):
         register_trip(start, end)
 
     if local:
-        print(f"{r.command.name} = {r.value} {cfg['PIDs'][r.command.name.lower()]['unit']}")
+        print(f"{r.command.name} = {r.value} {cfg["profiles"][cfg["car"]["profile"]][r.command.name.lower()]['unit']}")
     else:
         write_to_influx(r)
 
 def write_to_influx(r: OBDResponse):
     if r.value is None:
         return
-    print(f"Writing to InfluxDB: {r.command.name} = {r.value} {cfg['PIDs'][r.command.name.lower()]['unit']}")
+    print(f"Writing to InfluxDB: {r.command.name} = {r.value} {cfg["profiles"][cfg["car"]["profile"]][r.command.name.lower()]['unit']}")
     point = Point(r.command.name).tag("unit", cfg["PIDs"][r.command.name.lower()]["unit"]).field("value", r.value.magnitude)
     # Log before writing to InfluxDB
     write_api.write(bucket=bucket, org=cfg["influx"]["org"], record=point)
