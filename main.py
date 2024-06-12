@@ -105,12 +105,16 @@ def write(r: OBDResponse):
     # Check if engine running by checking if battery is charging
     if r.command.name == "SPEED" and not check_power():
         # stop obd client
-        obd_client.close()
+        try:
+            obd_client.close()
+        except:
+            print("failed to close obd client")
 
         end = time.time()
 
         # wait for internet connectivity
         while not ping_db:
+            print("Waintinh for db")
             time.sleep(5)
 
         register_trip(start, end)
