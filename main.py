@@ -94,6 +94,8 @@ def ping_db() -> bool:
 start = time.time()
 
 def write(r: OBDResponse):
+    if r.value is None:
+        return
     # Check if engine running by checking if battery is charging
     if r.command.name == "SPEED" and not check_power():
         # stop obd client
