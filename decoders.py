@@ -23,7 +23,6 @@ def audi_temp(messages):
     v = v - 40
     return Unit.Quantity(v, Unit.celsius)
 
-def audi_fuel_level:
 
 
 decoders = dict()
