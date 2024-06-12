@@ -14,3 +14,5 @@ decoders["count"] = obd.decoders.count
 decoders["rpm"] = obd.decoders.uas(0x07)
 decoders["maf"] = obd.decoders.uas(0x27)
 decoders["power_from_maf"] = power_from_maf
+decoders["temp"] = obd.decoders.temp
+decoders["fuel_rate"] = obd.decoders.fuel_rate
