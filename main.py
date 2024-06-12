@@ -47,6 +47,7 @@ profile = cfg["profiles"]["default"]
 
 def register_trip(start: float, end: float):
     # Connect to postgresql
+    print("Registering trip")
     conn =  psycopg2.connect(
         host=cfg['postgres']['host'],
         port=cfg['postgres']['port'],
@@ -59,13 +60,18 @@ def register_trip(start: float, end: float):
     # Get owner id
     cur.execute(f"SELECT owner_id FROM owners WHERE name = '{cfg['owner']}'")
     owner_id = cur.fetchone()[0]
-
+    print(owner_id)
     # Get car id
     cur.execute(f"SELECT car_id FROM car WHERE brand = '{cfg['car']['brand']}' AND model = '{cfg['car']['model']}' AND year = '{cfg['car']['year']}' AND engine = '{cfg['car']['engine']}'")
     car_id = cur.fetchone()[0]
-
+    print(car_id)
     # Insert trip
     cur.execute(f"INSERT INTO trips (start, end, owner_id, car_id) VALUES ({start}, {end}, {owner_id}, {car_id})")
+    conn.commit()
+
+    cur.close()
+    conn.close()
+    print("Trip registered")
 
 def check_power() -> bool:
     # Open TCP socket to check if power is on
@@ -110,15 +116,26 @@ def write(r: OBDResponse):
         register_trip(start, end)
 
     if local:
-        print(f"{r.command.name} = {r.value} {profile[r.command.name.lower()]['unit']}")
+        name = r.command.name.lower()
+
+        if profile[r.command.name.lower()]["name"]:
+            name = profile[r.command.name.lower()]["name"]
+
+        print(f"{name} = {r.value} {profile[r.command.name.lower()]['unit']}")
     else:
         write_to_influx(r)
 
 def write_to_influx(r: OBDResponse):
     if r.value is None:
         return
+
+    name = r.command.name.lower()
+
+    if profile[r.command.name.lower()]["name"]:
+        name = profile[r.command.name.lower()]["name"]
+
     print(f"Writing to InfluxDB: {r.command.name} = {r.value} {profile[r.command.name.lower()]['unit']}")
-    point = Point(r.command.name).tag("unit", profile[r.command.name.lower()]["unit"]).field("value", r.value.magnitude)
+    point = Point(name).tag("unit", profile[r.command.name.lower()]["unit"]).field("value", r.value.magnitude)
     # Log before writing to InfluxDB
     write_api.write(bucket=bucket, org=cfg["influx"]["org"], record=point)
 

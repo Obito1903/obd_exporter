@@ -1,0 +1,118 @@
+bt:
+  address: "C1:0B:64:26:37:2F"
+  channel: 2
+
+influx:
+  url: http://localhost:8086
+  org: car-copilot
+  bucket: local
+  token: token
+ping_host: 192.168.1.23
+
+pg:
+  host: 192.168.1.54
+  port: 5432
+  user: car-copilot
+  mdp: d
+  db: car-copilot
+
+owner: Samuel
+car:
+  brand: Audi
+  model: A4
+  engine: 2.0 TDI
+  year: "2009"
+  profile: audi_a4_2.0_tdi_2009
+
+profiles:
+  default:
+    intake_temp:
+      name: "Intake temperature"
+      enabled: true
+      unit: "°C"
+    engine_load:
+      name: "Calculated engine load value"
+      enabled: true
+      unit: "%"
+    throttle_pos:
+      name: "Throttle position"
+      enabled: true
+      unit: "%"
+    speed:
+      name: "Vehicle speed"
+      enabled: true
+      unit: km/h
+    rpm:
+      name: "Engine RPM"
+      enabled: true
+      unit: rpm
+    commanded_equiv_ratio:
+      name: "Commanded equiv ratio"
+      enabled: true
+      unit: ""
+    maf:
+      name: "Mass air flow"
+      enabled: true
+      unit: "g/s"
+    fuel_level:
+      name: "Fuel level (%)"
+      enabled: true
+      unit: "%"
+    oil_temp:
+      name: "Oil temperatur"
+      enabled: true
+      unit: "°C"
+    fuel_rate:
+      enabled: true
+      unit: l/h
+    power:
+      enabled: true
+      description: "Power from MAF"
+      pid: "0110"
+      decoder: power_from_maf
+      size: 5
+      unit: hp
+
+  audi_a4_2.0_tdi_2009:
+    fuel_level:
+      enabled: true
+      name: "Fuel Level"
+      pid: "22100C"
+      decoder: count
+      size: 5
+      unit: "L"
+    oil_temp:
+      enabled: true
+      name: "Oil temperature"
+      pid: "2211BE"
+      decoder: temp
+      size: 5
+      unit: "°C"
+    fuel_rate:
+      enabled: true
+      name: "Fuel rate"
+      pid: "22111A"
+      decoder: fuel_rate
+      size: 5
+      unit: l/h
+    gear:
+      enabled: true
+      name: "Gear engaged"
+      pid: "22100D"
+      decoder: count
+      size: 4
+      unit: ""
+    boost_pressure_actual:
+      enabled: true
+      name: "Boost pressure actual"
+      pid: "221057"
+      decoder: count
+      size: 5
+      unit: "hPa"
+    boost_pressure_commanded:
+      enabled: true
+      name: "Boost pressure commanded"
+      pid: "221149"
+      decoder: count
+      size: 5
+      unit: "hPa"
