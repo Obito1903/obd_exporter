@@ -75,7 +75,7 @@ def check_power() -> bool:
     response = client.recv(1024)
     client.close()
     print(response)
-    if response == b" true\n":
+    if response == b"battery_power_plugged: true\n":
         return True
     else:
         return False
