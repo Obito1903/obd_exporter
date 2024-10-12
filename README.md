@@ -25,15 +25,15 @@ Create a remote
 influx remote create \
   --name car-copilot \
   --remote-url https://car-influx.obito.fr \
-  --remote-api-token u51rc2Uqx-bEvuoDmojwIffQodQBumzIDA1-xZ841hUqhngdbFsHn7_pte3AfaxiJfhMb8nyXdMAU632twbPUA== \
-  --remote-org-id 42f4d1e21ed1ed18
+  --remote-api-token <token> \
+  --remote-org-id <id>
 ```
 
 ```bash
 influx replication create \
   --name car-copilot \
-  --remote-id 0d2f586d4d67d000 \
-  --local-bucket-id 2a2d616cb27794b1 \
+  --remote-id <id> \
+  --local-bucket-id <id> \
   --remote-bucket samuel
 ```
 
